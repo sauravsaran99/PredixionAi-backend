@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
   console.log("API is UP and running");
   res.json({ message: "Welcome to mysql node...." });
 });
+
 app.use("/api", taskRoutes);
 
 console.log(
@@ -26,16 +27,17 @@ console.log(
   process.env.DB_HOST
 );
 
+const PORT = process.env.PORT || 10000; // Ensure the server listens on port 10000
+
 const startServer = async () => {
   try {
     await sequelize.sync({ force: false }); // This will recreate the database on every startup
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
 };
 
-// Call startServer to ensure DB connection is established
 startServer();
-
-// Export the Express app
-module.exports = app;
