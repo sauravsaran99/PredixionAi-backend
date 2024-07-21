@@ -110,3 +110,4 @@ cucumber_report.json
 .DS_Store
 .AppleDouble
 .LSOverride
+.vercel

@@ -29,12 +29,13 @@ console.log(
 const startServer = async () => {
   try {
     await sequelize.sync({ force: false }); // This will recreate the database on every startup
-    app.listen(8080, () => {
-      console.log("Server is running on port 8080");
-    });
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
 };
 
+// Call startServer to ensure DB connection is established
 startServer();
+
+// Export the Express app
+module.exports = app;
